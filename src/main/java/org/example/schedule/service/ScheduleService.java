@@ -77,5 +77,21 @@ public class ScheduleService {
         );
     }
 
+    // 일정 수정
+    @Transactional
+    public ScheduleResponse updateSchedule(Long scheduleId, ScheduleRequest scheduleRequest) {
+        Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(
+                () -> new IllegalArgumentException("그런 scheduleId는 찾을 수 없습니다.")
+        );
+        schedule.updateSchedule(scheduleRequest.getTitle(), scheduleRequest.getAuthor());
+        return new ScheduleResponse(
+                schedule.getId(),
+                schedule.getTitle(),
+                schedule.getDescription(),
+                schedule.getAuthor(),
+                schedule.getCreatedAt(),
+                schedule.getModifiedAt()
+        );
+    }
 }
 

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.schedule.dto.ScheduleRequest;
 import org.example.schedule.dto.ScheduleResponse;
 import org.example.schedule.service.ScheduleService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,5 +31,13 @@ public class ScheduleController {
             @PathVariable Long scheduleId
     ) {
         return scheduleService.getSchedule(scheduleId);
+    }
+
+    @PutMapping("/schedules/{scheduleId}")
+    public ScheduleResponse updateSchedule(
+            @PathVariable Long scheduleId,
+            @RequestBody ScheduleRequest scheduleRequest
+    ) {
+        return scheduleService.updateSchedule(scheduleId, scheduleRequest);
     }
 }
