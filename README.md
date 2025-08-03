@@ -1,4 +1,12 @@
-API 명세서
+# ERD
+<img width="249" height="144" alt="schedule ERD" src="https://github.com/user-attachments/assets/23521577-b4b1-4195-84f8-44ddb5b973f3" />
+
+
+#
+
+
+
+# API 명세서
 
 1. 일정 생성
 POST /schedules (새로운 일정을 등록합니다.)
