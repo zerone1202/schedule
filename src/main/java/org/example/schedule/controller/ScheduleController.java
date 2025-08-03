@@ -6,6 +6,8 @@ import org.example.schedule.dto.ScheduleResponse;
 import org.example.schedule.service.ScheduleService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class ScheduleController {
@@ -16,5 +18,17 @@ public class ScheduleController {
     public ScheduleResponse createSchedule(
             @RequestBody ScheduleRequest request) {
         return scheduleService.createSchedule(request);
+    }
+
+    @GetMapping("/schedules")
+    public List<ScheduleResponse> getSchedules() {
+        return scheduleService.getSchedules();
+    }
+
+    @GetMapping("/schedules/{scheduleId}")
+    public ScheduleResponse getSchedule(
+            @PathVariable Long scheduleId
+    ) {
+        return scheduleService.getSchedule(scheduleId);
     }
 }

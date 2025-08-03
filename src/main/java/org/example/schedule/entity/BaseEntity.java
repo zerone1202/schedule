@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
-//작성일, 수정일 필드는 JPA Auditing을 활용하여 적용
+    //작성일, 수정일 필드는 JPA Auditing을 활용하여 적용
     @CreatedDate
     @Column(updatable = false)
     @Temporal(TemporalType.TIMESTAMP)

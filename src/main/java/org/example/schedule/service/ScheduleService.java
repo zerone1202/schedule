@@ -7,6 +7,10 @@ import org.example.schedule.entity.Schedule;
 import org.example.schedule.repository.ScheduleRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -35,5 +39,43 @@ public class ScheduleService {
                 savedSchedule.getModifiedAt()
         );
     }
+
+    // 일정 조회 (전체 일정 조회)
+    @Transactional(readOnly = true)
+    public List<ScheduleResponse> getSchedules() {
+        List<Schedule> schedules = scheduleRepository.findAll();
+
+        List<ScheduleResponse> responseList = new ArrayList<>();
+
+        for (Schedule schedule : schedules) {
+            ScheduleResponse scheduleResponse = new ScheduleResponse(
+                    schedule.getId(),
+                    schedule.getTitle(),
+                    schedule.getDescription(),
+                    schedule.getAuthor(),
+                    schedule.getCreatedAt(),
+                    schedule.getModifiedAt()
+            );
+            responseList.add(scheduleResponse);
+        }
+        return responseList;
+    }
+
+    // 일정 조회 (선택 일정 조회)
+    @Transactional(readOnly = true)
+    public ScheduleResponse getSchedule(Long scheduleId) {
+        Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(
+                () -> new IllegalArgumentException("그런 scheduleId는 찾을 수 없습니다.")
+        );
+        return new ScheduleResponse(
+                schedule.getId(),
+                schedule.getTitle(),
+                schedule.getDescription(),
+                schedule.getAuthor(),
+                schedule.getCreatedAt(),
+                schedule.getModifiedAt()
+        );
+    }
+
 }
 

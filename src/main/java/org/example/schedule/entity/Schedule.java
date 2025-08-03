@@ -13,7 +13,8 @@ import lombok.NoArgsConstructor;
 public class Schedule extends BaseEntity {
 
     // 각 일정의 고유 식별자(ID)를 자동으로 생성하여 관리
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String description;
