@@ -7,7 +7,6 @@ import org.example.schedule.entity.Schedule;
 import org.example.schedule.repository.ScheduleRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,6 +91,16 @@ public class ScheduleService {
                 schedule.getCreatedAt(),
                 schedule.getModifiedAt()
         );
+    }
+
+    // 일정 삭제
+    @Transactional
+    public void deleteSchedule(Long scheduleId) {
+        boolean b = scheduleRepository.existsById(scheduleId);
+        if (!b) {
+            throw new IllegalArgumentException("그런 scheduleId는 찾을 수 없습니다.");
+        }
+        scheduleRepository.deleteById(scheduleId);
     }
 }
 
